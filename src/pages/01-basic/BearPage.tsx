@@ -18,7 +18,8 @@ export const BearPage = () => {
 };
 
 export const BlackBears = () => {
-  const { blackBears } = useBearStore();
+  
+  const blackBears = useBearStore((state) => state.blackBears);
   const increaseBlackBears = useBearStore((state) => state.increaseBlackBears);
   return (
     <WhiteCard centered>
@@ -33,7 +34,9 @@ export const BlackBears = () => {
   );
 };
 export const PandaBears = () => {
-  const { pandaBears, increasePandaBears } = useBearStore();
+  const pandaBears = useBearStore(state => state.pandaBears);
+  const increasePandaBears = useBearStore(state => state.increasePandaBears);
+
   return (
     <WhiteCard centered>
       <h2>Osos Panda</h2>
@@ -47,7 +50,8 @@ export const PandaBears = () => {
   );
 };
 export const PolarBears = () => {
-  const { polarBears, increasePolarBears } = useBearStore();
+  const polarBears = useBearStore(state => state.polarBears);
+  const increasePolarBears = useBearStore(state => state.increasePolarBears);
   return (
     <WhiteCard centered>
       <h2>Osos Polares</h2>
