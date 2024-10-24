@@ -1,3 +1,4 @@
+import { useShallow } from "zustand/shallow";
 import { WhiteCard } from "../../components";
 import { useBearStore } from "../../stores";
 
@@ -12,13 +13,13 @@ export const BearPage = () => {
         <BlackBears />
         <PandaBears />
         <PolarBears />
+        <BearsDisplay />
       </div>
     </>
   );
 };
 
 export const BlackBears = () => {
-  
   const blackBears = useBearStore((state) => state.blackBears);
   const increaseBlackBears = useBearStore((state) => state.increaseBlackBears);
   return (
@@ -34,8 +35,8 @@ export const BlackBears = () => {
   );
 };
 export const PandaBears = () => {
-  const pandaBears = useBearStore(state => state.pandaBears);
-  const increasePandaBears = useBearStore(state => state.increasePandaBears);
+  const pandaBears = useBearStore((state) => state.pandaBears);
+  const increasePandaBears = useBearStore((state) => state.increasePandaBears);
 
   return (
     <WhiteCard centered>
@@ -50,8 +51,8 @@ export const PandaBears = () => {
   );
 };
 export const PolarBears = () => {
-  const polarBears = useBearStore(state => state.polarBears);
-  const increasePolarBears = useBearStore(state => state.increasePolarBears);
+  const polarBears = useBearStore((state) => state.polarBears);
+  const increasePolarBears = useBearStore((state) => state.increasePolarBears);
   return (
     <WhiteCard centered>
       <h2>Osos Polares</h2>
@@ -61,6 +62,25 @@ export const PolarBears = () => {
         <span className="text-3xl mx-2 lg:mx-10"> {polarBears} </span>
         <button onClick={() => increasePolarBears(-1)}>-1</button>
       </div>
+    </WhiteCard>
+  );
+};
+
+export const BearsDisplay = () => {
+  const bears = useBearStore(useShallow((state) => state.bears));
+  const doNothing = useBearStore((state) => state.doNothing);
+  const addBear = useBearStore((state) => state.addBear);
+  const clearBears = useBearStore((state) => state.clearBears);
+
+  return (
+    <WhiteCard>
+      <h1>Osos</h1>
+      <div className="flex flex-col gap-4">
+        <button onClick={doNothing}>Do Nothing</button>
+        <button onClick={addBear}>Agregar Oso</button>
+        <button onClick={clearBears}>Borrar Osos</button>
+      </div>
+      <pre>{JSON.stringify(bears, null, 2)}</pre>
     </WhiteCard>
   );
 };
